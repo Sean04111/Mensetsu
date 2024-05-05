@@ -1,6 +1,7 @@
 package structrue
 
 import (
+	"fmt"
 	"testing"
 	"time"
 )
@@ -15,4 +16,18 @@ func TestGpool(t *testing.T) {
 		})
 	}
 	select {}
+}
+
+func TestChannelRange(t *testing.T) {
+	ch := make(chan int,2)
+	go func() {
+			ch <- 1
+	}()
+	time.Sleep(time.Second)
+
+	fmt.Println("a")
+	fmt.Println(len(ch))
+	for v := range ch {
+		fmt.Println("got :", v)
+	}
 }
